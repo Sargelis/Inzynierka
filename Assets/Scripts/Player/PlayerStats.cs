@@ -10,9 +10,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float expNeeded = 100f;
     [HideInInspector] public float exp = 0f;
     [HideInInspector] public float lvl = 1f;
-    InventoryManager inventory;
-    [SerializeField] GameObject playerShooting;
-    Transform player;
 
     [HideInInspector]public int weaponIndex;
     //public int passiveItemIndex;
@@ -20,14 +17,6 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        inventory = FindObjectOfType<InventoryManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        GameObject ps = (GameObject)Instantiate(playerShooting, player.transform.position, player.rotation);
-        ps.transform.SetParent(player);
-        PlayerShooting playerShooting1 = ps.GetComponent<PlayerShooting>();
-
-        inventory.AddWeapon(0, playerShooting1);
     }
     void Update()
     {

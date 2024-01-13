@@ -21,8 +21,14 @@ public class GameManagment : MonoBehaviour
     UIManager uiManager;
 
     //controllers
-    [SerializeField] GameObject axeControllerObject;
+    [SerializeField] GameObject axeControllerObject; //1
     AxeController axeController;
+    [SerializeField] GameObject bookControllerObject; //2
+    BookController bookController;
+    [SerializeField] GameObject fireballControllerObject; //3
+    FireballController fireballController;
+    [SerializeField] GameObject scytheControllerObject; //4
+    ScytheController scytheController;
 
     //data
     bool stopTimer = false;
@@ -31,6 +37,7 @@ public class GameManagment : MonoBehaviour
     float minutes, seconds;
     float time;
     int slotIndex;
+    int rand1, rand2, rand3;
 
     void Start()
     {
@@ -73,11 +80,20 @@ public class GameManagment : MonoBehaviour
                 em.enabled = false;
             }
 
+            //przejœc przez listê Weapon slots i off
             if(FindObjectOfType<AxeController>() != null) //check controller
             {
                 axeController = FindObjectOfType<AxeController>();
                 axeController.enabled = false;
             }
+
+            //losowoœæ - wybierz z puli 1 do 4 w³¹cznie, po wybraniu nie bierz ponownie tej liczby od uwagê, o ile nie zosta³a dodana do invenory - wtedy ulepsze broñ
+            rand1 = Random.Range(1, 5);
+            rand2 = Random.Range(1, 5);
+            rand3 = Random.Range(1, 5);
+            uiManager.SetBbutton1(rand1);
+            uiManager.SetBbutton2(rand2);
+            uiManager.SetBbutton3(rand3);
 
             ability.enabled = true;
         }
@@ -91,7 +107,15 @@ public class GameManagment : MonoBehaviour
         }
     }
 
-    public void Click() //unfreeze all
+    /*
+    B£EDY
+    -dodaæ sprawdzenie czy lista jest pe³na jak tak to ju¿ nie losuj nowcyh broni.
+    -jak juz broæ istnieje to nie dodawaæ jej ponownie do inventory tylko zwiêkszyæ jej poziom
+    -wy³aczyæ controllery oraz stworzone obiekty tej broni
+    -poprawiæ generowanie bookweapon
+    -przystosowaæ bronie do zwiêkszania ich poziomów - prznieœæ pola danych do controllera i weapon dziedziczy po nim
+    */
+    public void Click1() //unfreeze all
     {
         stopTimer = false;
         playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -108,28 +132,110 @@ public class GameManagment : MonoBehaviour
             em.enabled = true;
         }
 
+        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
         if (FindObjectOfType<AxeController>() != null) //check controller
         {
+            //CheckController();
             axeController.enabled = true;
         }
-        else //addcontroller do slotindex w³¹cznie
-        {
-            GameObject axeController = (GameObject)Instantiate(axeControllerObject, player.position, player.rotation);
-            axeController.transform.SetParent(player);
-            AxeController axeController1 = axeController.GetComponent<AxeController>();
-
-            inventory.AddWeapon(slotIndex, axeController1);
-            slotIndex++;
-        }
+        RollWeapon(rand1);
 
         ability.enabled = false;
     }
-    public void AddController(float rand)
+    public void Click2() //unfreeze all
+    {
+        stopTimer = false;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        es.enabled = true;
+        ps.enabled = true;
+        wc.enabled = true;
+        //weapons RigidbodyConstraints2D.FreezeRotation
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            em = enemy.GetComponent<EnemyMovment>();
+            em.enabled = true;
+        }
+
+        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
+        if (FindObjectOfType<AxeController>() != null) //check controller
+        {
+            //CheckController();
+            axeController.enabled = true;
+        }
+        RollWeapon(rand2);
+
+        ability.enabled = false;
+    }
+    public void Click3() //unfreeze all
+    {
+        stopTimer = false;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        es.enabled = true;
+        ps.enabled = true;
+        wc.enabled = true;
+        //weapons RigidbodyConstraints2D.FreezeRotation
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            em = enemy.GetComponent<EnemyMovment>();
+            em.enabled = true;
+        }
+
+        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
+        if (FindObjectOfType<AxeController>() != null) //check controller
+        {
+            //CheckController();
+            axeController.enabled = true;
+        }
+        RollWeapon(rand3);
+
+        ability.enabled = false;
+    }
+    public void CheckController()
     {
 
     }
-    public void CheckController(float rand)
+    public void RollWeapon(int rand)
     {
+        switch (rand) 
+        {
+            case 1:
+                GameObject axeController = (GameObject)Instantiate(axeControllerObject, player.position, player.rotation);
+                axeController.transform.SetParent(player);
+                AxeController _axeController = axeController.GetComponent<AxeController>();
 
+                inventory.AddWeapon(slotIndex, _axeController);
+                slotIndex++;
+                break;
+            case 2:
+                GameObject bookController = (GameObject)Instantiate(bookControllerObject, player.position, player.rotation);
+                bookController.transform.SetParent(player);
+                BookController _bookController = bookController.GetComponent<BookController>();
+
+                inventory.AddWeapon(slotIndex, _bookController);
+                slotIndex++;
+                break;
+            case 3:
+                GameObject fireballController = (GameObject)Instantiate(fireballControllerObject, player.position, player.rotation);
+                fireballController.transform.SetParent(player);
+                FireballController _fireballController = fireballController.GetComponent<FireballController>();
+
+                inventory.AddWeapon(slotIndex, _fireballController);
+                slotIndex++;
+                break;
+            case 4:
+                GameObject scytheController = (GameObject)Instantiate(scytheControllerObject, player.position, player.rotation);
+                scytheController.transform.SetParent(player);
+                ScytheController _scytheController = scytheController.GetComponent<ScytheController>();
+
+                inventory.AddWeapon(slotIndex, _scytheController);
+                slotIndex++;
+                break;
+        }
     }
 }
