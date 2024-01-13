@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public List<WeaponController> weaponSlots = new List<WeaponController>(3);
-    public int[] weaponLevels = new int[3];
+    public int[] weaponLevels = new int[3]; //musi odpowiadaæ pozycjom z listy weponSlots
     //public List<passiveItem> pasiveitemSlots = new List<passiveItem>(3);
     //public int[] passiveItemLevel = new int[3];
 
@@ -23,8 +23,10 @@ public class InventoryManager : MonoBehaviour
     {
 
     }
+    /*
     public void LevelUpPassiveItem(int slotIndex)
     {
 
     }
+    */
 }
