@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3295578012213047591}
   m_Layer: 0
   m_Name: Player Shooting
-  m_TagString: Untagged
+  m_TagString: WeaponController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55b1545fdd3ee240a80c4bf144c6067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   bulletPrefab: {fileID: 8811445114888064558, guid: abd204c50cd91174c8dc69c2ebec1065, type: 3}
   range: 10
   fireRate: 2
