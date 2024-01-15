@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5293206634403649229}
   m_Layer: 0
   m_Name: Axe Controller
-  m_TagString: Untagged
+  m_TagString: AXE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6267b59ca71ed8845b324d11f46682a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   axePrefab: {fileID: 4790026633532878404, guid: d44fd9b6e8bf8b14cb2748e10520c255, type: 3}
   fireRateAxe: 2.5

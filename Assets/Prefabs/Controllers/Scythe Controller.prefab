@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8341270200099995947}
   m_Layer: 0
   m_Name: Scythe Controller
-  m_TagString: Untagged
+  m_TagString: WeaponController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c966279495d2347479867beccf36b1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   scythePrefab: {fileID: 8196992903517187709, guid: 2b462218a9d0c644287f30b1cef895ee, type: 3}
   fireRateScythe: 2
