@@ -1217,11 +1217,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 460229876997253719, guid: 6fda37deb1d0ac04d9ff107a8c21a815, type: 3}
       propertyPath: expNeeded
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 460229876997253719, guid: 6fda37deb1d0ac04d9ff107a8c21a815, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 460229876997253719, guid: 6fda37deb1d0ac04d9ff107a8c21a815, type: 3}
       propertyPath: playerShooting
@@ -2180,6 +2180,18 @@ PrefabInstance:
     - target: {fileID: 4369614115265403316, guid: aa78f2d277c912f4fa3715ad66df9578, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864316190963816422, guid: aa78f2d277c912f4fa3715ad66df9578, type: 3}
+      propertyPath: waves.Array.data[0].waveQuota
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864316190963816422, guid: aa78f2d277c912f4fa3715ad66df9578, type: 3}
+      propertyPath: waves.Array.data[0].spawnInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864316190963816422, guid: aa78f2d277c912f4fa3715ad66df9578, type: 3}
+      propertyPath: waves.Array.data[0].enemyGroups.Array.data[0].enemyCount
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5958779479669523226, guid: aa78f2d277c912f4fa3715ad66df9578, type: 3}
       propertyPath: m_Name

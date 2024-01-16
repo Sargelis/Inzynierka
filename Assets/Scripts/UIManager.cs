@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
     {
         switch (rand) 
         {
+            case 0:
+                text1.text = "SHOOTING";
+                break;
             case 1:
                 text1.text = "AXE";
                 break;
@@ -49,6 +52,9 @@ public class UIManager : MonoBehaviour
     {
         switch (rand)
         {
+            case 0:
+                text2.text = "SHOOTING";
+                break;
             case 1:
                 text2.text = "AXE";
                 break;
@@ -67,6 +73,9 @@ public class UIManager : MonoBehaviour
     {
         switch (rand)
         {
+            case 0:
+                text3.text = "SHOOTING";
+                break;
             case 1:
                 text3.text = "AXE";
                 break;
