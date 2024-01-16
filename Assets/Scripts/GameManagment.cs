@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManagment : MonoBehaviour
 {
@@ -16,22 +17,23 @@ public class GameManagment : MonoBehaviour
     EnemyMovment em;
     EnemySpawner es;
     Rigidbody2D playerRB;
-    PlayerShooting ps;
     WeaponController wc;
     UIManager uiManager;
 
     //controllers
+    PlayerShooting shooting;
+    bool existShoot = false;
     [SerializeField] GameObject axeControllerObject; //1
-    AxeController axeController;
+    AxeController axe;
     bool existAxe = false;
     [SerializeField] GameObject bookControllerObject; //2
-    BookController bookController;
+    BookController book;
     bool existBook = false;
     [SerializeField] GameObject fireballControllerObject; //3
-    FireballController fireballController;
+    FireballController fireball;
     bool existFireball = false;
     [SerializeField] GameObject scytheControllerObject; //4
-    ScytheController scytheController;
+    ScytheController scythe;
     bool existScythe = false;
 
     //data
@@ -43,17 +45,19 @@ public class GameManagment : MonoBehaviour
     int slotIndex;
     int rand1, rand2, rand3;
     GameObject[] weaponsControllers;
+    List<int> rand = new List<int>(3);
+    int[] aquiredWeapons = new int[4];
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         es = FindObjectOfType<EnemySpawner>();
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        ps = FindObjectOfType<PlayerShooting>();
         playerLvl = FindObjectOfType<PlayerStats>().lvl;
         inventory = FindObjectOfType<InventoryManager>();
         wc = FindObjectOfType<WeaponController>();
         uiManager = FindObjectOfType<UIManager>();
+        //shooting = FindObjectOfType<PlayerShooting>();
 
         ability.enabled = false;
         currentLvl = playerLvl;
@@ -61,7 +65,6 @@ public class GameManagment : MonoBehaviour
         seconds = 0f;
         time = 0f;
         slotIndex = 1;
-
     }
     void Update()
     {
@@ -76,8 +79,8 @@ public class GameManagment : MonoBehaviour
             stopTimer = true;
             playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
             es.enabled = false;
-            ps.enabled = false;
             wc.enabled = false;
+            //shooting.enabled = true;
             //weapons RigidbodyConstrains2D.FreezeAll
 
             foreach (GameObject enemy in enemies)
@@ -87,6 +90,8 @@ public class GameManagment : MonoBehaviour
             }
 
             CheckController();
+            Debug.Log("DUPA");
+            Roll();
 
             //wy³¹czenie obiektów broni
             weaponsControllers = GameObject.FindGameObjectsWithTag("WeaponController");
@@ -94,11 +99,7 @@ public class GameManagment : MonoBehaviour
             {
                 weaponControllerObject.SetActive(false);
             }
-
-            //losowoœæ - wybierz z puli 1 do 4 w³¹cznie, po wybraniu nie bierz ponownie tej liczby od uwagê, o ile nie zosta³a dodana do invenory - wtedy ulepsze broñ
-            rand1 = Random.Range(1, 5);
-            rand2 = Random.Range(1, 5);
-            rand3 = Random.Range(1, 5);
+            
             uiManager.SetBbutton1(rand1);
             uiManager.SetBbutton2(rand2);
             uiManager.SetBbutton3(rand3);
@@ -116,8 +117,10 @@ public class GameManagment : MonoBehaviour
     }
 
     /*
-    B£EDY
-    -dodaæ sprawdzenie czy lista jest pe³na jak tak to ju¿ nie losuj nowcyh broni.
+    B£EDY/TO DO
+    -zwiêkszanie poziomow broni
+    -KRYTYCZNY unity zawiesza siê ca³kowicie kij wie czego
+    -po zape³nieniu slotów broni pojawiaj¹ siê bronie których gracz nie posiada ju¿/wylosowa³o bron jakiej gracz nie ma po zape³nieniu slotów
     -poprawiæ generowanie bookweapon
     -przystosowaæ bronie do zwiêkszania ich poziomów - prznieœæ pola danych do controllera i weapon dziedziczy po nim
     */
@@ -126,7 +129,6 @@ public class GameManagment : MonoBehaviour
         stopTimer = false;
         playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
         es.enabled = true;
-        ps.enabled = true;
         wc.enabled = true;
         //weapons RigidbodyConstraints2D.FreezeRotation
 
@@ -138,7 +140,7 @@ public class GameManagment : MonoBehaviour
             em.enabled = true;
         }
 
-        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
+        //w³¹cz obiekty 
         foreach (GameObject weaponControllerObject in weaponsControllers)
         {
             weaponControllerObject.SetActive(true);
@@ -152,7 +154,6 @@ public class GameManagment : MonoBehaviour
         stopTimer = false;
         playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
         es.enabled = true;
-        ps.enabled = true;
         wc.enabled = true;
         //weapons RigidbodyConstraints2D.FreezeRotation
 
@@ -164,7 +165,7 @@ public class GameManagment : MonoBehaviour
             em.enabled = true;
         }
 
-        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
+        //w³¹cz obiekty
         foreach (GameObject weaponControllerObject in weaponsControllers)
         {
             weaponControllerObject.SetActive(true);
@@ -178,7 +179,6 @@ public class GameManagment : MonoBehaviour
         stopTimer = false;
         playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
         es.enabled = true;
-        ps.enabled = true;
         wc.enabled = true;
         //weapons RigidbodyConstraints2D.FreezeRotation
 
@@ -190,7 +190,7 @@ public class GameManagment : MonoBehaviour
             em.enabled = true;
         }
 
-        //zamiast if do ka¿dego, przejœæ przez listê inventoryManager i off. dostaæ siê do gameObject poprzez Weaponslots gameObjectu Inventory Manager.
+        //w³¹cz obiekty
         foreach (GameObject weaponControllerObject in weaponsControllers)
         {
             weaponControllerObject.SetActive(true);
@@ -201,6 +201,7 @@ public class GameManagment : MonoBehaviour
     }
     public void CheckController()
     {
+        //if (FindObjectOfType<PlayerShooting>() != null) existShoot = true;
         if (FindObjectOfType<AxeController>() != null) existAxe = true;
         if (FindObjectOfType<BookController>() != null) existBook = true;
         if (FindObjectOfType<FireballController>() != null) existFireball = true;
@@ -210,6 +211,10 @@ public class GameManagment : MonoBehaviour
     {
         switch (rand)
         {
+            case 0:
+                Debug.Log("Ulepszono soohting");
+                //zwiêksz poziom broni
+                break;
             case 1:
                 if (!existAxe)
                     {
@@ -223,6 +228,7 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Ulepszono axe");
                     //zwiêksz poziom broni
                     break;
                 }
@@ -239,6 +245,7 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Ulepszono book");
                     //zwiêksz poziom broni
                     break;
                 }
@@ -255,6 +262,7 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Ulepszono fireball");
                     //zwiêksz poziom broni
                     break;
                 }
@@ -271,9 +279,66 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Ulepszono scythe");
                     //zwiêksz poziom broni
                     break;
                 }
+        }
+    }
+    public void Roll()
+    {
+        if (!inventory.weaponSlots.Contains(null))
+        {
+            Debug.Log("HELPP");
+            CopyWeaponList(inventory.weaponSlots);
+            //losowanie z elemntów listy
+            while (rand.Count != rand.Capacity)
+            {
+                int i = Random.Range(0, aquiredWeapons.Length);
+                if (rand.Contains(aquiredWeapons[i])) continue;
+                else rand.Add(aquiredWeapons[i]);
+            }
+            rand1 = rand[0];
+            rand2 = rand[1];
+            rand3 = rand[2];
+            rand.Clear();
+        }
+        else
+        {
+            //losowoœæ - wybierz z puli 0 - 4 czyli wszystkie bronie, bez powtórzeñ
+            while (rand.Count != rand.Capacity)
+            {
+                int i = Random.Range(0, 5);
+                if (rand.Contains(i)) continue;
+                else rand.Add(i);
+            }
+            rand1 = rand[0];
+            rand2 = rand[1];
+            rand3 = rand[2];
+            rand.Clear();
+        }
+    }
+    public void CopyWeaponList(List<WeaponController> list)
+    {
+        if (existShoot) shooting = FindObjectOfType<PlayerShooting>().GetComponent<PlayerShooting>();
+        if (existAxe) axe = FindObjectOfType<AxeController>().GetComponent<AxeController>();
+        if (existBook) book = FindObjectOfType<BookController>().GetComponent<BookController>();
+        if (existFireball) fireball = FindObjectOfType<FireballController>().GetComponent<FireballController>();
+        if (existScythe) scythe = FindObjectOfType<ScytheController>().GetComponent<ScytheController>();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].Equals(shooting)) aquiredWeapons[i] = 0;
+            else if (list[i].Equals(axe)) aquiredWeapons[i] = 1;
+            else if (list[i].Equals(book)) aquiredWeapons[i] = 2;
+            else if (list[i].Equals(fireball)) aquiredWeapons[i] = 3;
+            else if (list[i].Equals(scythe)) aquiredWeapons[i] = 4;
+            else Debug.LogWarning("zesra³o siê");
+        }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Debug.LogWarning(aquiredWeapons[i]);
         }
     }
 }
