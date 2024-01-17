@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2918646100202579651}
   m_Layer: 0
   m_Name: Scythe
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248c6f286f1c2e54ca707423f1c9fbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   scythePrefab: {fileID: 8196992903517187709}
   fireRateScythe: 2
   speed: 20

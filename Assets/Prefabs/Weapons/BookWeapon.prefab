@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8670288264157252828}
   m_Layer: 0
   m_Name: BookWeapon
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77f66c256c7dee4686c4f5886c98195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   bookPrefab: {fileID: 3888810387270416659}
   fireRateBook: 3
   speed: 2

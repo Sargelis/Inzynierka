@@ -20,5 +20,6 @@ public class WeaponController : MonoBehaviour
 
         inventory.AddWeapon(0, ps);
         inventory.weaponLevels[0] = 1;
+        inventory.shootingLvl = 1;
     }
 }

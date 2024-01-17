@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 493329036769142892}
   m_Layer: 0
   m_Name: AxeWeapon
-  m_TagString: Untagged
+  m_TagString: Undefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e176e2da76225b44ca679c3bde2505db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 1827886322280596040, guid: 6fda37deb1d0ac04d9ff107a8c21a815, type: 3}
+  playerShooting: {fileID: 0}
   axePrefab: {fileID: 4790026633532878404}
   fireRateAxe: 2.5
   speed: 3

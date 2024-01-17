@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PlayerShooting
 {
-    Transform target;
+    private Transform target;
     [SerializeField] float speed;
-    [SerializeField] float damage;
 
     void Update()
     {
