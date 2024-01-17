@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerShooting : WeaponController
 {
-    Transform target;
+    private Transform target;
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float range = 10f;
     [SerializeField] float fireRate = 2f; // sekundy
+    [SerializeField] public float damage;
     float cooldown = 0f;
 
     void Start()

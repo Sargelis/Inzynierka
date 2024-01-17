@@ -43,8 +43,10 @@ public class GameManagment : MonoBehaviour
     float minutes, seconds;
     float time;
     int slotIndex;
+    int index;
     int rand1, rand2, rand3;
     GameObject[] weaponsControllers;
+    GameObject[] weapons;
     List<int> rand = new List<int>(3);
     int[] aquiredWeapons = new int[4];
 
@@ -57,7 +59,7 @@ public class GameManagment : MonoBehaviour
         inventory = FindObjectOfType<InventoryManager>();
         wc = FindObjectOfType<WeaponController>();
         uiManager = FindObjectOfType<UIManager>();
-        //shooting = FindObjectOfType<PlayerShooting>();
+        shooting = FindObjectOfType<PlayerShooting>();
 
         ability.enabled = false;
         currentLvl = playerLvl;
@@ -90,7 +92,15 @@ public class GameManagment : MonoBehaviour
             }
 
             CheckController();
-            Debug.Log("DUPA");
+
+            //wy³¹cz weapony
+            weapons = GameObject.FindGameObjectsWithTag("Weapon");
+            foreach (GameObject weapon in weapons) 
+            {
+                weapon.SetActive(false);
+            }
+
+            SetControllers();
             Roll();
 
             //wy³¹czenie obiektów broni
@@ -118,12 +128,11 @@ public class GameManagment : MonoBehaviour
 
     /*
     B£EDY/TO DO
-    -zwiêkszanie poziomow broni
-    -KRYTYCZNY unity zawiesza siê ca³kowicie kij wie czego
-    -po zape³nieniu slotów broni pojawiaj¹ siê bronie których gracz nie posiada ju¿/wylosowa³o bron jakiej gracz nie ma po zape³nieniu slotów
     -poprawiæ generowanie bookweapon
     -przystosowaæ bronie do zwiêkszania ich poziomów - prznieœæ pola danych do controllera i weapon dziedziczy po nim
+    -zwiêkszanie obra¿eñ w zale¿noœci od poziomu
     */
+
     public void Click1() //unfreeze all
     {
         stopTimer = false;
@@ -144,6 +153,10 @@ public class GameManagment : MonoBehaviour
         foreach (GameObject weaponControllerObject in weaponsControllers)
         {
             weaponControllerObject.SetActive(true);
+        }
+        foreach (GameObject weapon in weapons)
+        {
+            weapon.SetActive(false);
         }
         RollWeapon(rand1);
 
@@ -170,6 +183,10 @@ public class GameManagment : MonoBehaviour
         {
             weaponControllerObject.SetActive(true);
         }
+        foreach (GameObject weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
         RollWeapon(rand2);
 
         ability.enabled = false;
@@ -195,13 +212,17 @@ public class GameManagment : MonoBehaviour
         {
             weaponControllerObject.SetActive(true);
         }
+        foreach (GameObject weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
         RollWeapon(rand3);
 
         ability.enabled = false;
     }
     public void CheckController()
     {
-        //if (FindObjectOfType<PlayerShooting>() != null) existShoot = true;
+        if (FindObjectOfType<PlayerShooting>() != null) existShoot = true;
         if (FindObjectOfType<AxeController>() != null) existAxe = true;
         if (FindObjectOfType<BookController>() != null) existBook = true;
         if (FindObjectOfType<FireballController>() != null) existFireball = true;
@@ -212,8 +233,7 @@ public class GameManagment : MonoBehaviour
         switch (rand)
         {
             case 0:
-                Debug.Log("Ulepszono soohting");
-                //zwiêksz poziom broni
+                inventory.LevelUpWeapon(0);
                 break;
             case 1:
                 if (!existAxe)
@@ -223,13 +243,15 @@ public class GameManagment : MonoBehaviour
                     AxeController _axeController = axeController.GetComponent<AxeController>();
 
                     inventory.AddWeapon(slotIndex, _axeController);
+                    inventory.weaponLevels[slotIndex] = 1;
+                    inventory.axeLvl = 1;
                     slotIndex++;
                     break;
                 }
                 else
                 {
-                    Debug.Log("Ulepszono axe");
-                    //zwiêksz poziom broni
+                    SearchIndex(inventory.weaponSlots, axe);
+                    inventory.LevelUpWeapon(index);
                     break;
                 }
             case 2:
@@ -240,13 +262,15 @@ public class GameManagment : MonoBehaviour
                     BookController _bookController = bookController.GetComponent<BookController>();
 
                     inventory.AddWeapon(slotIndex, _bookController);
+                    inventory.weaponLevels[slotIndex] = 1;
+                    inventory.bookLvl = 1;
                     slotIndex++;
                     break;
                 }
                 else
                 {
-                    Debug.Log("Ulepszono book");
-                    //zwiêksz poziom broni
+                    SearchIndex(inventory.weaponSlots, book);
+                    inventory.LevelUpWeapon(index);
                     break;
                 }
             case 3:
@@ -257,13 +281,15 @@ public class GameManagment : MonoBehaviour
                     FireballController _fireballController = fireballController.GetComponent<FireballController>();
 
                     inventory.AddWeapon(slotIndex, _fireballController);
+                    inventory.weaponLevels[slotIndex] = 1;
+                    inventory.fireballLvl = 1;
                     slotIndex++;
                     break;
                 }
                 else
                 {
-                    Debug.Log("Ulepszono fireball");
-                    //zwiêksz poziom broni
+                    SearchIndex(inventory.weaponSlots, fireball);
+                    inventory.LevelUpWeapon(index);
                     break;
                 }
             case 4:
@@ -274,13 +300,15 @@ public class GameManagment : MonoBehaviour
                     ScytheController _scytheController = scytheController.GetComponent<ScytheController>();
 
                     inventory.AddWeapon(slotIndex, _scytheController);
+                    inventory.weaponLevels[slotIndex] = 1;
+                    inventory.scytheLvl = 1;
                     slotIndex++;
                     break;
                 }
                 else
                 {
-                    Debug.Log("Ulepszono scythe");
-                    //zwiêksz poziom broni
+                    SearchIndex(inventory.weaponSlots, scythe);
+                    inventory.LevelUpWeapon(index);
                     break;
                 }
         }
@@ -289,7 +317,6 @@ public class GameManagment : MonoBehaviour
     {
         if (!inventory.weaponSlots.Contains(null))
         {
-            Debug.Log("HELPP");
             CopyWeaponList(inventory.weaponSlots);
             //losowanie z elemntów listy
             while (rand.Count != rand.Capacity)
@@ -320,11 +347,7 @@ public class GameManagment : MonoBehaviour
     }
     public void CopyWeaponList(List<WeaponController> list)
     {
-        if (existShoot) shooting = FindObjectOfType<PlayerShooting>().GetComponent<PlayerShooting>();
-        if (existAxe) axe = FindObjectOfType<AxeController>().GetComponent<AxeController>();
-        if (existBook) book = FindObjectOfType<BookController>().GetComponent<BookController>();
-        if (existFireball) fireball = FindObjectOfType<FireballController>().GetComponent<FireballController>();
-        if (existScythe) scythe = FindObjectOfType<ScytheController>().GetComponent<ScytheController>();
+        SetControllers();
 
         for (int i = 0; i < list.Count; i++)
         {
@@ -333,12 +356,18 @@ public class GameManagment : MonoBehaviour
             else if (list[i].Equals(book)) aquiredWeapons[i] = 2;
             else if (list[i].Equals(fireball)) aquiredWeapons[i] = 3;
             else if (list[i].Equals(scythe)) aquiredWeapons[i] = 4;
-            else Debug.LogWarning("zesra³o siê");
         }
-
-        for (int i = 0; i < list.Count; i++)
-        {
-            Debug.LogWarning(aquiredWeapons[i]);
-        }
+    }
+    public void SetControllers()
+    {
+        if (existShoot) shooting = FindObjectOfType<PlayerShooting>().GetComponent<PlayerShooting>();
+        if (existAxe) axe = FindObjectOfType<AxeController>().GetComponent<AxeController>();
+        if (existBook) book = FindObjectOfType<BookController>().GetComponent<BookController>();
+        if (existFireball) fireball = FindObjectOfType<FireballController>().GetComponent<FireballController>();
+        if (existScythe) scythe = FindObjectOfType<ScytheController>().GetComponent<ScytheController>();
+    }
+    public void SearchIndex(List<WeaponController> list, WeaponController weapon)
+    {
+        index = list.IndexOf(weapon);
     }
 }

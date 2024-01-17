@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5422426848438409273}
   m_Layer: 0
   m_Name: FireBall
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8665a974d6550a744be163665a37f586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
   fireballPrefab: {fileID: 8537302204971132967}
   fireRateFireball: 3
   speed: 4
