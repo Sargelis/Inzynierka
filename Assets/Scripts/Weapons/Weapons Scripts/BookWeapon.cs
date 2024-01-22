@@ -6,7 +6,6 @@ public class BookWeapon : BookController
 {
     [SerializeField] float speed;
     [SerializeField] float radiusOffset;
-    [SerializeField] float damage;
 
     float angle = 0f;
     float direction = -1f;
@@ -30,5 +29,6 @@ public class BookWeapon : BookController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
+        if (collision.CompareTag("BOSS")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
     }
 }

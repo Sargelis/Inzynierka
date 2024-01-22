@@ -8,6 +8,7 @@ public class FireballController : WeaponController
     [SerializeField] GameObject fireballPrefab;
     float cooldownFireball = 0f;
     [SerializeField] float fireRateFireball = 3f; // sekundy
+    [SerializeField] public float damage;
 
     void Start()
     {

@@ -47,3 +47,4 @@ MonoBehaviour:
   playerShooting: {fileID: 0}
   fireballPrefab: {fileID: 8537302204971132967, guid: b4304a14c8d7ead448cabcd80221f605, type: 3}
   fireRateFireball: 3
+  damage: 1

@@ -47,3 +47,4 @@ MonoBehaviour:
   playerShooting: {fileID: 0}
   scythePrefab: {fileID: 8196992903517187709, guid: 2b462218a9d0c644287f30b1cef895ee, type: 3}
   fireRateScythe: 2
+  damage: 1

@@ -47,3 +47,4 @@ MonoBehaviour:
   playerShooting: {fileID: 0}
   bookPrefab: {fileID: 3888810387270416659, guid: 1b9e12d7ad0c2054b8ccd9f312525cac, type: 3}
   fireRateBook: 3
+  damage: 1

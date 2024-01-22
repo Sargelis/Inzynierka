@@ -48,3 +48,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8811445114888064558, guid: abd204c50cd91174c8dc69c2ebec1065, type: 3}
   range: 10
   fireRate: 2
+  damage: 1

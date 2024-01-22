@@ -47,3 +47,4 @@ MonoBehaviour:
   playerShooting: {fileID: 0}
   axePrefab: {fileID: 4790026633532878404, guid: d44fd9b6e8bf8b14cb2748e10520c255, type: 3}
   fireRateAxe: 2.5
+  damage: 1

@@ -73,6 +73,7 @@ public class GameManagment : MonoBehaviour
         playerLvl = FindObjectOfType<PlayerStats>().lvl;
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
 
         if (currentLvl != playerLvl) //freeze all
         {
@@ -90,6 +91,8 @@ public class GameManagment : MonoBehaviour
                 em = enemy.GetComponent<EnemyMovment>();
                 em.enabled = false;
             }
+
+            if(boss != null) boss.GetComponent<EnemyMovment>().enabled = false;
 
             CheckController();
 
@@ -129,8 +132,8 @@ public class GameManagment : MonoBehaviour
     /*
     B£EDY/TO DO
     -poprawiæ generowanie bookweapon
-    -przystosowaæ bronie do zwiêkszania ich poziomów - prznieœæ pola danych do controllera i weapon dziedziczy po nim
-    -zwiêkszanie obra¿eñ w zale¿noœci od poziomu
+    -zmieniæ aktuwacje obiektów weapon po tagach
+    -Dodaæ koniec gry
     */
 
     public void Click1() //unfreeze all
@@ -142,12 +145,14 @@ public class GameManagment : MonoBehaviour
         //weapons RigidbodyConstraints2D.FreezeRotation
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
 
         foreach (GameObject enemy in enemies)
         {
             em = enemy.GetComponent<EnemyMovment>();
             em.enabled = true;
         }
+        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
 
         //w³¹cz obiekty 
         foreach (GameObject weaponControllerObject in weaponsControllers)
@@ -171,12 +176,14 @@ public class GameManagment : MonoBehaviour
         //weapons RigidbodyConstraints2D.FreezeRotation
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
 
         foreach (GameObject enemy in enemies)
         {
             em = enemy.GetComponent<EnemyMovment>();
             em.enabled = true;
         }
+        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
 
         //w³¹cz obiekty
         foreach (GameObject weaponControllerObject in weaponsControllers)
@@ -200,12 +207,14 @@ public class GameManagment : MonoBehaviour
         //weapons RigidbodyConstraints2D.FreezeRotation
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
 
         foreach (GameObject enemy in enemies)
         {
             em = enemy.GetComponent<EnemyMovment>();
             em.enabled = true;
         }
+        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
 
         //w³¹cz obiekty
         foreach (GameObject weaponControllerObject in weaponsControllers)
@@ -234,6 +243,7 @@ public class GameManagment : MonoBehaviour
         {
             case 0:
                 inventory.LevelUpWeapon(0);
+                shooting.damage += 1;
                 break;
             case 1:
                 if (!existAxe)
@@ -252,6 +262,7 @@ public class GameManagment : MonoBehaviour
                 {
                     SearchIndex(inventory.weaponSlots, axe);
                     inventory.LevelUpWeapon(index);
+                    axe.damage += 1;
                     break;
                 }
             case 2:
@@ -271,6 +282,7 @@ public class GameManagment : MonoBehaviour
                 {
                     SearchIndex(inventory.weaponSlots, book);
                     inventory.LevelUpWeapon(index);
+                    book.damage += 1;
                     break;
                 }
             case 3:
@@ -290,6 +302,7 @@ public class GameManagment : MonoBehaviour
                 {
                     SearchIndex(inventory.weaponSlots, fireball);
                     inventory.LevelUpWeapon(index);
+                    fireball.damage += 1;
                     break;
                 }
             case 4:
@@ -309,6 +322,7 @@ public class GameManagment : MonoBehaviour
                 {
                     SearchIndex(inventory.weaponSlots, scythe);
                     inventory.LevelUpWeapon(index);
+                    scythe.damage += 1;
                     break;
                 }
         }

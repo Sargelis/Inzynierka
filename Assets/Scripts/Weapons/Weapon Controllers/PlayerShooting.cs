@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerShooting : WeaponController
@@ -9,7 +10,7 @@ public class PlayerShooting : WeaponController
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float range = 10f;
     [SerializeField] float fireRate = 2f; // sekundy
-    [SerializeField] public float damage;
+    [SerializeField] public float damage = 1f;
     float cooldown = 0f;
 
     void Start()
@@ -30,10 +31,12 @@ public class PlayerShooting : WeaponController
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); //stwórz listê obiektów z tagiem enemyTag
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("BOSS");
+        GameObject[] enemiess = enemies.Concat(bosses).ToArray();
         float shorthestDist = Mathf.Infinity; //ustaw dystans na nieskonczonoœæ
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies) //dla kazdego enemy w liœcie enemies
+        foreach (GameObject enemy in enemiess) //dla kazdego enemy w liœcie enemies
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position); //oblicz odleg³oœæ do enemy
             if (distanceToEnemy < shorthestDist ) //je¿eli odleg³oœc do enenmy < najmniejszej odleg³oœci to najmniejsza odleg³oœc = odleg³oœc do enemy i neaest enemy to ten enemy

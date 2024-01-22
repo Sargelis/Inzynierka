@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -11,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
         public string waveName;
         public int waveQuota;   //total enemies
         public float spawnInterval;
-        [HideInInspector]public int spawnCount;  //number enemies spawned
+        [HideInInspector] public int spawnCount;  //number enemies spawned
         public List<EnemyGroup> enemyGroups;    //List of gropu enemis to spawn
     }
     [System.Serializable]
@@ -22,17 +21,27 @@ public class EnemySpawner : MonoBehaviour
         [HideInInspector] public int spawnCount;  //enemies already spawned
         public GameObject enemyPrefab;
     }
+    [System.Serializable]
+    public class Bosses
+    {
+        public string bossName;
+        public GameObject bossPrefab;
+    }
 
     [SerializeField] List<Wave> waves;    //List of waves
     int currentWaveCount;
     Transform player;
     [Header("Spawner Attributes")]
-    float spanwTimer; //when spawn next enemy
+    float spawnTimer; //when spawn next enemy
     [SerializeField] float waveInterval;  //interval between each wave
     int enemiesAlive;
     [SerializeField] int maxEnemiesAllowed;   //max of enemies on map
     bool maxEnemiesReached = false;
-    [Header("Spanw Positions")]
+    [Header("Bosses")]
+    [SerializeField] List<Bosses> bosses;
+    int i = 0;
+    float bossTimer = 60;
+    [Header("Spawn Positions")]
     public List<Transform> relativeSpawnPoints; //musi public
 
     void Start()
@@ -44,12 +53,20 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0) StartCoroutine(BeginNextWave()); //check if wave ended and next wave should start
 
-        spanwTimer += Time.deltaTime;
+        bossTimer -= Time.deltaTime;
+        spawnTimer += Time.deltaTime;
 
-        if (spanwTimer >= waves[currentWaveCount].spawnInterval)    //check when spawn next enemy
+        if (spawnTimer >= waves[currentWaveCount].spawnInterval)    //check when spawn next enemy
         {
-            spanwTimer = 0f;
+            spawnTimer = 0f;
             SpawnEnemies();
+        }
+
+        if (bossTimer <= 0)
+        {
+            SpawnBoss();
+            bossTimer = 60;
+            i++;
         }
     }
 
@@ -75,7 +92,8 @@ public class EnemySpawner : MonoBehaviour
                         return;
                     }
 
-                    Instantiate(enemyGroup.enemyPrefab, player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position, Quaternion.identity);
+                    GameObject mob = Instantiate(enemyGroup.enemyPrefab, player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position, Quaternion.identity);
+                    mob.transform.SetParent(this.transform);
 
                     enemyGroup.spawnCount++;
                     waves[currentWaveCount].spawnCount++;
@@ -90,7 +108,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(waveInterval);  //czekaj przez waveInterval sekund
 
-        if(currentWaveCount < waves.Count - 1) //jak jest wiêcej fal to zacznij nastêpn¹
+        if (currentWaveCount < waves.Count - 1) //jak jest wiêcej fal to zacznij nastêpn¹
         {
             currentWaveCount++;
             CalculateWaveQuota();
@@ -99,5 +117,9 @@ public class EnemySpawner : MonoBehaviour
     public void OnEnemyKilled()
     {
         enemiesAlive--;
+    }
+    void SpawnBoss()
+    {
+        Instantiate(bosses[i].bossPrefab, player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position, Quaternion.identity);
     }
 }

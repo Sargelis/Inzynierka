@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScytheWeapon : ScytheController
 {
     [SerializeField] float speed;
-    [SerializeField] float damage;
     [SerializeField] float duration;
 
     float angle;
@@ -44,5 +43,6 @@ public class ScytheWeapon : ScytheController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
+        if (collision.CompareTag("BOSS")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
     }
 }

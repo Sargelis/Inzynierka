@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ExpGem : MonoBehaviour
 {
-    [SerializeField] float gemValue = 10f; 
+    [SerializeField] public float gemValue = 10f;
 
     void Start()
     {

@@ -8,6 +8,7 @@ public class BookController : WeaponController
     [SerializeField] GameObject bookPrefab;
     float cooldownBook = 0f;
     [SerializeField] float fireRateBook = 3f; // sekundy
+    [SerializeField] public float damage;
 
     void Start()
     {

@@ -9,6 +9,7 @@ TagManager:
   - EXP
   - WeaponController
   - Weapon
+  - BOSS
   layers:
   - Default
   - TransparentFX
