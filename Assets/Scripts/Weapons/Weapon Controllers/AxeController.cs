@@ -8,6 +8,7 @@ public class AxeController : WeaponController
     [SerializeField] GameObject axePrefab;
     float cooldownAxe = 0f;
     [SerializeField] float fireRateAxe = 2.5f; // sekundy
+    [SerializeField] public float damage;
 
     void Start()
     {

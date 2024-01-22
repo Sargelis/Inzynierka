@@ -8,6 +8,7 @@ public class ScytheController : WeaponController
     [SerializeField] GameObject scythePrefab;
     float cooldownScythe = 0f;
     [SerializeField] float fireRateScythe = 2f; // sekundy
+    [SerializeField] public float damage;
 
     void Start()
     {

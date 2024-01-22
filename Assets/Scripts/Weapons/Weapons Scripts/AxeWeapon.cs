@@ -6,7 +6,6 @@ public class AxeWeapon : AxeController
 {
     [SerializeField] float speed;
     [SerializeField] float moveSpeed;
-    [SerializeField] public float damage;
     [SerializeField] float duration;
 
     float radiusOffset = 0f;
@@ -34,5 +33,6 @@ public class AxeWeapon : AxeController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
+        if (collision.CompareTag("BOSS")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
     }
 }

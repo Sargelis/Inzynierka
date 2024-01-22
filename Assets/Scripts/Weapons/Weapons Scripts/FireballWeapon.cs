@@ -5,7 +5,6 @@ using UnityEngine;
 public class FireballWeapon : FireballController
 {
     [SerializeField] float speed;
-    [SerializeField] float damage;
     [SerializeField] float duration;
 
     float angle;
@@ -35,5 +34,6 @@ public class FireballWeapon : FireballController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
+        if (collision.CompareTag("BOSS")) collision.gameObject.GetComponent<EnemyStats>().TakeDanage(damage);
     }
 }
