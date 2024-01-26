@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Bosses")]
     [SerializeField] List<Bosses> bosses;
     int i = 0;
-    float bossTimer = 60;
+    [SerializeField] float bossTimer = 60;
     [Header("Spawn Positions")]
     public List<Transform> relativeSpawnPoints; //musi public
 

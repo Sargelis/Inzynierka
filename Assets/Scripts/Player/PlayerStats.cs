@@ -20,7 +20,6 @@ public class PlayerStats : MonoBehaviour
     }
     void Update()
     {
-        if (currentHealth <= 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //je¿eli ¿ycie <=0 to zmieñ scene
         if (exp >= expNeeded)
         {
             lvl++;
