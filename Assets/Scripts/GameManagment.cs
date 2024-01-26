@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,7 @@ public class GameManagment : MonoBehaviour
     Rigidbody2D playerRB;
     WeaponController wc;
     UIManager uiManager;
+    PlayerStats playerStats;
 
     //controllers
     PlayerShooting shooting;
@@ -55,6 +57,7 @@ public class GameManagment : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         es = FindObjectOfType<EnemySpawner>();
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerStats = FindObjectOfType<PlayerStats>();
         playerLvl = FindObjectOfType<PlayerStats>().lvl;
         inventory = FindObjectOfType<InventoryManager>();
         wc = FindObjectOfType<WeaponController>();
@@ -71,6 +74,8 @@ public class GameManagment : MonoBehaviour
     void Update()
     {
         playerLvl = FindObjectOfType<PlayerStats>().lvl;
+
+        if (playerStats.currentHealth <= 0) SceneManager.LoadScene("GameOver");
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         var boss = GameObject.FindGameObjectWithTag("BOSS");
@@ -127,13 +132,17 @@ public class GameManagment : MonoBehaviour
             seconds = Mathf.FloorToInt(time % 60);
             timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
+
+        if(time >= 60) SceneManager.LoadScene("Menu");
     }
 
     /*
     B£EDY/TO DO
     -poprawiæ generowanie bookweapon
-    -zmieniæ aktuwacje obiektów weapon po tagach
-    -Dodaæ koniec gry
+    -zmieniæ aktywacje obiektów weapon po tagach
+    -wybór trybu?(okienko czy fullscreen)
+    -menu pauzy
+    -wprowadzenie (cel gry, historia?)
     */
 
     public void Click1() //unfreeze all
