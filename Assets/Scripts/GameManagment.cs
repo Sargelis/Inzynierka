@@ -1,17 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class GameManagment : MonoBehaviour
 {
-    //UI
-    public Canvas ability;
-    public TextMeshProUGUI timer;
-
     //main things
     Transform player;
     InventoryManager inventory;
@@ -42,8 +35,6 @@ public class GameManagment : MonoBehaviour
     bool stopTimer = false;
     float currentLvl;
     float playerLvl;
-    float minutes, seconds;
-    float time;
     int slotIndex;
     int index;
     int rand1, rand2, rand3;
@@ -64,11 +55,7 @@ public class GameManagment : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         shooting = FindObjectOfType<PlayerShooting>();
 
-        ability.enabled = false;
         currentLvl = playerLvl;
-        minutes = 0f;
-        seconds = 0f;
-        time = 0f;
         slotIndex = 1;
     }
     void Update()
@@ -77,63 +64,24 @@ public class GameManagment : MonoBehaviour
 
         if (playerStats.currentHealth <= 0) SceneManager.LoadScene("GameOver");
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
-
-        if (currentLvl != playerLvl) //freeze all
+        if (currentLvl != playerLvl)
         {
             currentLvl = playerLvl;
 
-            stopTimer = true;
-            playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
-            es.enabled = false;
-            wc.enabled = false;
-            //shooting.enabled = true;
-            //weapons RigidbodyConstrains2D.FreezeAll
-
-            foreach (GameObject enemy in enemies)
-            {
-                em = enemy.GetComponent<EnemyMovment>();
-                em.enabled = false;
-            }
-
-            if(boss != null) boss.GetComponent<EnemyMovment>().enabled = false;
-
-            CheckController();
-
-            //wy³¹cz weapony
-            weapons = GameObject.FindGameObjectsWithTag("Weapon");
-            foreach (GameObject weapon in weapons) 
-            {
-                weapon.SetActive(false);
-            }
-
-            SetControllers();
+            Pause();
             Roll();
 
-            //wy³¹czenie obiektów broni
-            weaponsControllers = GameObject.FindGameObjectsWithTag("WeaponController");
-            foreach (GameObject weaponControllerObject in weaponsControllers)
-            {
-                weaponControllerObject.SetActive(false);
-            }
-            
             uiManager.SetBbutton1(rand1);
             uiManager.SetBbutton2(rand2);
             uiManager.SetBbutton3(rand3);
 
-            ability.enabled = true;
+            uiManager.wasAbility = true;
+            uiManager.ability.enabled = true;
         }
 
-        if (!stopTimer)
-        {
-            time += 1 * Time.deltaTime;
-            minutes = Mathf.FloorToInt(time / 60);
-            seconds = Mathf.FloorToInt(time % 60);
-            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        }
+        if (!stopTimer) uiManager.SetTimer();
 
-        if(time >= 60) SceneManager.LoadScene("Menu");
+        if(uiManager.time >= 600) SceneManager.LoadScene("Menu");
     }
 
     /*
@@ -141,102 +89,31 @@ public class GameManagment : MonoBehaviour
     -poprawiæ generowanie bookweapon
     -zmieniæ aktywacje obiektów weapon po tagach
     -wybór trybu?(okienko czy fullscreen)
-    -menu pauzy
     -wprowadzenie (cel gry, historia?)
     */
 
-    public void Click1() //unfreeze all
+    public void Click1() 
     {
-        stopTimer = false;
-        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-        es.enabled = true;
-        wc.enabled = true;
-        //weapons RigidbodyConstraints2D.FreezeRotation
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
-
-        foreach (GameObject enemy in enemies)
-        {
-            em = enemy.GetComponent<EnemyMovment>();
-            em.enabled = true;
-        }
-        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
-
-        //w³¹cz obiekty 
-        foreach (GameObject weaponControllerObject in weaponsControllers)
-        {
-            weaponControllerObject.SetActive(true);
-        }
-        foreach (GameObject weapon in weapons)
-        {
-            weapon.SetActive(false);
-        }
+        UnPause();
         RollWeapon(rand1);
 
-        ability.enabled = false;
+        uiManager.ability.enabled = false;
+        uiManager.wasAbility = false;
     }
-    public void Click2() //unfreeze all
+    public void Click2() 
     {
-        stopTimer = false;
-        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-        es.enabled = true;
-        wc.enabled = true;
-        //weapons RigidbodyConstraints2D.FreezeRotation
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
-
-        foreach (GameObject enemy in enemies)
-        {
-            em = enemy.GetComponent<EnemyMovment>();
-            em.enabled = true;
-        }
-        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
-
-        //w³¹cz obiekty
-        foreach (GameObject weaponControllerObject in weaponsControllers)
-        {
-            weaponControllerObject.SetActive(true);
-        }
-        foreach (GameObject weapon in weapons)
-        {
-            weapon.SetActive(false);
-        }
+        UnPause();
         RollWeapon(rand2);
 
-        ability.enabled = false;
+        uiManager.ability.enabled = false;
+        uiManager.wasAbility = false;
     }
-    public void Click3() //unfreeze all
+    public void Click3() 
     {
-        stopTimer = false;
-        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-        es.enabled = true;
-        wc.enabled = true;
-        //weapons RigidbodyConstraints2D.FreezeRotation
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
-
-        foreach (GameObject enemy in enemies)
-        {
-            em = enemy.GetComponent<EnemyMovment>();
-            em.enabled = true;
-        }
-        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
-
-        //w³¹cz obiekty
-        foreach (GameObject weaponControllerObject in weaponsControllers)
-        {
-            weaponControllerObject.SetActive(true);
-        }
-        foreach (GameObject weapon in weapons)
-        {
-            weapon.SetActive(false);
-        }
+        UnPause();
         RollWeapon(rand3);
-
-        ability.enabled = false;
+        uiManager.ability.enabled = false;
+        uiManager.wasAbility = false;
     }
     public void CheckController()
     {
@@ -370,8 +247,6 @@ public class GameManagment : MonoBehaviour
     }
     public void CopyWeaponList(List<WeaponController> list)
     {
-        SetControllers();
-
         for (int i = 0; i < list.Count; i++)
         {
             if (list[i].Equals(shooting)) aquiredWeapons[i] = 0;
@@ -392,5 +267,67 @@ public class GameManagment : MonoBehaviour
     public void SearchIndex(List<WeaponController> list, WeaponController weapon)
     {
         index = list.IndexOf(weapon);
+    }
+    public void Pause()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
+
+        stopTimer = true;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
+        es.enabled = false;
+        wc.enabled = false;
+
+        foreach (GameObject enemy in enemies)
+        {
+            em = enemy.GetComponent<EnemyMovment>();
+            em.enabled = false;
+        }
+
+        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = false;
+
+        //wy³¹cz weapony
+        weapons = GameObject.FindGameObjectsWithTag("Weapon");
+        foreach (GameObject weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
+
+        CheckController();
+        SetControllers();
+
+        //wy³¹czenie obiektów broni
+        weaponsControllers = GameObject.FindGameObjectsWithTag("WeaponController");
+        foreach (GameObject weaponControllerObject in weaponsControllers)
+        {
+            weaponControllerObject.SetActive(false);
+        }
+    }
+    public void UnPause()
+    {
+        stopTimer = false;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        es.enabled = true;
+        wc.enabled = true;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var boss = GameObject.FindGameObjectWithTag("BOSS");
+
+        foreach (GameObject enemy in enemies)
+        {
+            em = enemy.GetComponent<EnemyMovment>();
+            em.enabled = true;
+        }
+        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
+
+        //w³¹cz obiekty
+        foreach (GameObject weaponControllerObject in weaponsControllers)
+        {
+            weaponControllerObject.SetActive(true);
+        }
+        foreach (GameObject weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
     }
 }
