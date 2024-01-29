@@ -81,7 +81,11 @@ public class GameManagment : MonoBehaviour
 
         if (!stopTimer) uiManager.SetTimer();
 
+<<<<<<< Updated upstream
         if(uiManager.time >= 600) SceneManager.LoadScene("Menu");
+=======
+        if(uiManager.time >= 600) SceneManager.LoadScene("YouWin");
+>>>>>>> Stashed changes
     }
 
     /*

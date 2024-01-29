@@ -9,7 +9,14 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+<<<<<<< Updated upstream
 
+=======
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+>>>>>>> Stashed changes
     public void Quit()
     {
         Application.Quit();
