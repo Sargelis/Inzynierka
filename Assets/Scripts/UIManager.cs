@@ -11,8 +11,11 @@ public class UIManager : MonoBehaviour
     public Canvas ability;
     public TextMeshProUGUI timer;
     public Canvas pause;
+    public Slider healthBar;
+    public Slider expBar;
 
     GameManagment gameManager;
+    PlayerStats playerStats;
 
     float minutes, seconds;
     [HideInInspector] public float time;
@@ -27,14 +30,28 @@ public class UIManager : MonoBehaviour
         seconds = 0f;
         time = 0f;
         gameManager = FindObjectOfType<GameManagment>();
+        playerStats = FindObjectOfType<PlayerStats>();
+        healthBar.maxValue = playerStats.maxHealth;
+        healthBar.value = playerStats.maxHealth;
+        expBar.maxValue = playerStats.expNeeded;
+        expBar.value = playerStats.exp;
     }
     void Update()
     {
+        SetHealthBar();
+        SetExpBar();
         if (Input.GetKeyDown(KeyCode.Escape) && isPaused) Reseume();
         else if (Input.GetKeyDown(KeyCode.Escape) && !isPaused) PauseMenu();
     }
-    //healthbar
-    //expbar
+    public void SetHealthBar()
+    {
+        healthBar.value = playerStats.currentHealth;
+    }
+    public void SetExpBar()
+    {
+        expBar.value = playerStats.exp;
+        expBar.maxValue = playerStats.expNeeded;
+    }
     //coins
     public void SetBbutton1(int rand)
     {
