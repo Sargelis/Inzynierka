@@ -11,6 +11,7 @@ public class AxeWeapon : AxeController
     float radiusOffset = 0f;
     float angle = 0f;
     float direction = -1f;
+    float rotation = 0f;
     Vector3 startPosition;
 
     void Start()
@@ -22,11 +23,12 @@ public class AxeWeapon : AxeController
     {
         angle += Time.deltaTime * direction * speed; //odpowiada za ruch po kole
         radiusOffset += Time.deltaTime * moveSpeed; //radiusOffset odpowiada za zwiêkszanie promienia
+        rotation += Time.deltaTime * 1;
         float x = Mathf.Cos(angle) * radiusOffset;
         float y = Mathf.Sin(angle) * radiusOffset;
 
         this.transform.position = startPosition + new Vector3(x, y, 0);
-
+        this.transform.Rotate(0, 0, rotation);
         duration -= Time.deltaTime;
         if (duration <= 0f ) Destroy(gameObject);
     }

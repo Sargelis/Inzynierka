@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     Rigidbody2D rb;
+    SpriteRenderer playerSprite;
     Vector2 moveDir;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -27,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         moveDir = new Vector2(moveX, moveY).normalized;
+        if (moveX < 0) playerSprite.flipX = true;
+        else if (moveX > 0) playerSprite.flipX = false;
     }
     void Move()
     {

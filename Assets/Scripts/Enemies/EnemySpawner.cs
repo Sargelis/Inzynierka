@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawner Attributes")]
     float spawnTimer; //when spawn next enemy
     [SerializeField] float waveInterval;  //interval between each wave
-    int enemiesAlive;
+    [HideInInspector] public int enemiesAlive;
     [SerializeField] int maxEnemiesAllowed;   //max of enemies on map
     bool maxEnemiesReached = false;
     [Header("Bosses")]
@@ -121,5 +121,6 @@ public class EnemySpawner : MonoBehaviour
     void SpawnBoss()
     {
         Instantiate(bosses[i].bossPrefab, player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position, Quaternion.identity);
+        enemiesAlive++;
     }
 }

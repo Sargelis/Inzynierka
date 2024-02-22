@@ -6,9 +6,9 @@ public class FireballController : WeaponController
 {
     [Header("Fireball Weapon")]
     [SerializeField] GameObject fireballPrefab;
-    float cooldownFireball = 0f;
-    [SerializeField] float fireRateFireball = 3f; // sekundy
-    [SerializeField] public float damage;
+    [HideInInspector] public float cooldownFireball = 0f;
+    public float fireRateFireball = 3f; // sekundy
+    public float damage;
 
     void Start()
     {
@@ -29,6 +29,5 @@ public class FireballController : WeaponController
     {
         GameObject fireball = (GameObject)Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
         fireball.transform.SetParent(transform);
-        AxeWeapon fireballWeapon = fireball.GetComponent<AxeWeapon>();
     }
 }

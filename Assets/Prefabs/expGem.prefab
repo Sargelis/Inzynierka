@@ -190,4 +190,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9332b37f3af66f458654888cc982ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemValue: 40
+  gemValue: 20

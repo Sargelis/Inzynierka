@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3546647037578444191}
   - component: {fileID: 2843519565467067816}
-  - component: {fileID: -9049495739907418276}
   - component: {fileID: -2918646100202579651}
+  - component: {fileID: 850214354967602968}
   m_Layer: 0
   m_Name: Scythe
   m_TagString: Weapon
@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 8196992903517187709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2843519565467067816
 SpriteRenderer:
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1909789458, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,8 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &-9049495739907418276
-BoxCollider2D:
+--- !u!114 &-2918646100202579651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196992903517187709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248c6f286f1c2e54ca707423f1c9fbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
+  scythePrefab: {fileID: 8196992903517187709}
+  fireRateScythe: 2
+  damage: 1
+  speed: 20
+  duration: 0.5
+--- !u!60 &850214354967602968
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,30 +140,54 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.5399998, y: 1.8001927}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &-2918646100202579651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8196992903517187709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 248c6f286f1c2e54ca707423f1c9fbb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerShooting: {fileID: 0}
-  scythePrefab: {fileID: 8196992903517187709}
-  fireRateScythe: 2
-  speed: 20
-  damage: 1
-  duration: 0.5
+  m_Points:
+    m_Paths:
+    - - {x: 0.51311445, y: 0.75555}
+      - {x: 0.25618085, y: 0.87545234}
+      - {x: -0.13778397, y: 0.87545234}
+      - {x: -0.30907303, y: 0.7898078}
+      - {x: -0.2234285, y: 0.6699055}
+      - {x: -0.13778397, y: 0.6699055}
+      - {x: 0.15340741, y: 0.51574534}
+      - {x: 0.15340741, y: 0.5328742}
+      - {x: 0.1191496, y: 0.51574534}
+      - {x: -0.00075273507, y: 0.395843}
+      - {x: -0.30907303, y: 0.0018781786}
+      - {x: -0.685909, y: -0.5633757}
+      - {x: -0.7544246, y: -0.76892257}
+      - {x: -0.7544246, y: -0.83743817}
+      - {x: -0.70303786, y: -0.8545671}
+      - {x: -0.65165114, y: -0.8031804}
+      - {x: -0.46323317, y: -0.46060225}
+      - {x: -0.00075273507, y: 0.22455394}
+      - {x: 0.32469645, y: 0.3615852}
+      - {x: 0.39321208, y: 0.24168286}
+      - {x: 0.5473722, y: -0.5976335}
+      - {x: 0.4617277, y: -0.66614914}
+      - {x: 0.5473722, y: -0.8888249}
+      - {x: 0.70153236, y: -0.8888249}
+      - {x: 0.7871769, y: -0.83743817}
+      - {x: 0.7871769, y: -0.06663744}
+      - {x: 0.70153236, y: 0.3101985}
+    - - {x: 0.64053667, y: -0.32575235}
+      - {x: 0.5988981, y: -0.08214165}
+      - {x: 0.53024334, y: 0.22455394}
+      - {x: 0.4445988, y: 0.4129719}
+      - {x: 0.22192304, y: 0.63564765}
+      - {x: 0.033505075, y: 0.7212922}
+      - {x: 0.020971965, y: 0.72867286}
+      - {x: 0.028956302, y: 0.75555}
+      - {x: 0.12082132, y: 0.7514187}
+      - {x: 0.25005436, y: 0.71818197}
+      - {x: 0.4445988, y: 0.6013899}
+      - {x: 0.65014565, y: -0.100895256}
+      - {x: 0.6672746, y: -0.118024155}
+      - {x: 0.67952937, y: -0.27552584}
+      - {x: 0.65604085, y: -0.3445059}
+  m_UseDelaunayMesh: 0

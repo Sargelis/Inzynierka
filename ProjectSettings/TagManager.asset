@@ -10,6 +10,8 @@ TagManager:
   - WeaponController
   - Weapon
   - BOSS
+  - Rotator
+  - BookWeapon
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class ScytheController : WeaponController
     [SerializeField] GameObject scythePrefab;
     float cooldownScythe = 0f;
     [SerializeField] float fireRateScythe = 2f; // sekundy
-    [SerializeField] public float damage;
+    public float damage;
 
     void Start()
     {
@@ -29,6 +29,5 @@ public class ScytheController : WeaponController
     {
         GameObject scythe = (GameObject)Instantiate(scythePrefab, firePoint.position, firePoint.rotation);
         scythe.transform.SetParent(transform);
-        AxeWeapon scytheWeapon = scythe.GetComponent<AxeWeapon>();
     }
 }
