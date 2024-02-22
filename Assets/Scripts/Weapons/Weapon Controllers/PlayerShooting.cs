@@ -10,7 +10,7 @@ public class PlayerShooting : WeaponController
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float range = 10f;
     [SerializeField] float fireRate = 2f; // sekundy
-    [SerializeField] public float damage = 1f;
+    public float damage = 1f;
     float cooldown = 0f;
 
     void Start()

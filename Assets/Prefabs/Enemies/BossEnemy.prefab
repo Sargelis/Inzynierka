@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4466734794993842731}
   - component: {fileID: 3228361232911701985}
-  - component: {fileID: 4982624124268869955}
+  - component: {fileID: 901671864028606257}
   - component: {fileID: 8111872877894250122}
   - component: {fileID: 8822859331276921502}
   - component: {fileID: 5001834158964366019}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3228361232911701985
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29e7727ef8e71c34481055ce30db0e73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4982624124268869955
-BoxCollider2D:
+--- !u!60 &901671864028606257
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,15 +124,27 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.24, y: 0.04}
+      - {x: 0.22, y: 0.08}
+      - {x: 0.14, y: 0.16}
+      - {x: 0.099999994, y: 0.17999999}
+      - {x: -0.12, y: 0.17999999}
+      - {x: -0.32, y: -0.14}
+      - {x: -0.32, y: -0.29}
+      - {x: -0.29, y: -0.29999998}
+      - {x: 0.21, y: -0.29999998}
+      - {x: 0.25, y: -0.28}
+      - {x: 0.32, y: -0.25}
+      - {x: 0.32, y: -0.14}
+  m_UseDelaunayMesh: 0
 --- !u!50 &8111872877894250122
 Rigidbody2D:
   serializedVersion: 4

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    protected  Transform firePoint;
+    protected Transform firePoint;
     InventoryManager inventory;
     [SerializeField] GameObject playerShooting;
     Transform player;

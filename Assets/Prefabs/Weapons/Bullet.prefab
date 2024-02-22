@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 295832091373826768}
   - component: {fileID: 8578299699104264838}
-  - component: {fileID: 2055879917470927952}
   - component: {fileID: 7832729320500445396}
+  - component: {fileID: 5250230100754086244}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Weapon
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8811445114888064558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 443905560, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,8 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &2055879917470927952
-CircleCollider2D:
+--- !u!114 &7832729320500445396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811445114888064558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a4e96592efb084597348b7e86c3013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  range: 10
+  fireRate: 2
+  damage: 5
+  speed: 25
+--- !u!60 &5250230100754086244
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,19 +137,27 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &7832729320500445396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8811445114888064558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a4e96592efb084597348b7e86c3013, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 25
-  damage: 5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.8200878}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.24007037, y: 0.28748938}
+      - {x: 0.2504457, y: 0.3580801}
+      - {x: 0.1964555, y: 0.40739173}
+      - {x: -0.060478084, y: 0.40739173}
+      - {x: -0.23176713, y: 0.21897377}
+      - {x: -0.23176713, y: -0.20924886}
+      - {x: -0.023165494, y: -0.43554637}
+      - {x: 0.24784221, y: -0.41479573}
+      - {x: 0.2649711, y: -0.3976668}
+      - {x: 0.2649711, y: -0.27776447}
+      - {x: 0.1266534, y: -0.14732398}
+      - {x: 0.12431815, y: 0.12283832}
+  m_UseDelaunayMesh: 0

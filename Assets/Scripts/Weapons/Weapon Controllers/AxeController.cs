@@ -8,7 +8,7 @@ public class AxeController : WeaponController
     [SerializeField] GameObject axePrefab;
     float cooldownAxe = 0f;
     [SerializeField] float fireRateAxe = 2.5f; // sekundy
-    [SerializeField] public float damage;
+    public float damage;
 
     void Start()
     {
@@ -29,6 +29,5 @@ public class AxeController : WeaponController
     {
         GameObject axe = (GameObject)Instantiate(axePrefab, firePoint.position, firePoint.rotation);
         axe.transform.SetParent(transform);
-        AxeWeapon axeWeapon = axe.GetComponent<AxeWeapon>();
     }
 }

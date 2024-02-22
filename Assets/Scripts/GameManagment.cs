@@ -40,8 +40,11 @@ public class GameManagment : MonoBehaviour
     int rand1, rand2, rand3;
     GameObject[] weaponsControllers;
     GameObject[] weapons;
+    GameObject[] books;
     List<int> rand = new List<int>(3);
     int[] aquiredWeapons = new int[4];
+    [Header("Time in seconds")]
+    [SerializeField] float endTimer;
 
     void Start()
     {
@@ -60,6 +63,8 @@ public class GameManagment : MonoBehaviour
     }
     void Update()
     {
+        if (uiManager.time >= endTimer) stopTimer = true;
+
         playerLvl = FindObjectOfType<PlayerStats>().lvl;
 
         if (playerStats.currentHealth <= 0) SceneManager.LoadScene("GameOver");
@@ -81,20 +86,9 @@ public class GameManagment : MonoBehaviour
 
         if (!stopTimer) uiManager.SetTimer();
 
-<<<<<<< Updated upstream
-        if(uiManager.time >= 600) SceneManager.LoadScene("Menu");
-=======
-        if(uiManager.time >= 600) SceneManager.LoadScene("YouWin");
->>>>>>> Stashed changes
-    }
 
-    /*
-    B£EDY/TO DO
-    -poprawiæ generowanie bookweapon
-    -zmieniæ aktywacje obiektów weapon po tagach
-    -wybór trybu?(okienko czy fullscreen)
-    -wprowadzenie (cel gry, historia?)
-    */
+        if (uiManager.time >= endTimer && es.enemiesAlive <=0) SceneManager.LoadScene("YouWin");
+    }
 
     public void Click1() 
     {
@@ -132,8 +126,10 @@ public class GameManagment : MonoBehaviour
         switch (rand)
         {
             case 0:
+                if(inventory.shootingLvl == inventory.maxlvl) break;
                 inventory.LevelUpWeapon(0);
-                shooting.damage += 1;
+                inventory.shootingLvl += 1;
+                shooting.damage *= 1.5f;
                 break;
             case 1:
                 if (!existAxe)
@@ -150,9 +146,11 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    if (inventory.axeLvl == inventory.maxlvl) break;
                     SearchIndex(inventory.weaponSlots, axe);
                     inventory.LevelUpWeapon(index);
-                    axe.damage += 1;
+                    inventory.axeLvl += 1;
+                    axe.damage *= 1.8f;
                     break;
                 }
             case 2:
@@ -166,13 +164,33 @@ public class GameManagment : MonoBehaviour
                     inventory.weaponLevels[slotIndex] = 1;
                     inventory.bookLvl = 1;
                     slotIndex++;
+                    //existBook = true;
                     break;
                 }
                 else
                 {
+                    if (inventory.bookLvl == inventory.maxlvl) break;
                     SearchIndex(inventory.weaponSlots, book);
                     inventory.LevelUpWeapon(index);
-                    book.damage += 1;
+                    book.damage *= 1.6f;
+                    inventory.bookLvl += 1;
+                    //if (inventory.bookLvl <= 4) book.maxSpawnCount += 1;
+                    //switch (inventory.bookLvl)
+                    //{
+                    //    case 2:
+                    //        book.fireRateBook = 0.6f;
+                    //        book.cooldownBook = 0.6f;
+                    //        break;
+                    //    case 3:
+                    //        book.fireRateBook = 0.5f;
+                    //        book.cooldownBook = 0.5f;
+                    //        break;
+                    //    case 4:
+                    //        book.fireRateBook = 0.4f;
+                    //        book.cooldownBook = 0.4f;
+                    //        break;
+                    //    default: break;
+                    //}
                     break;
                 }
             case 3:
@@ -190,9 +208,12 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    if (inventory.fireballLvl == inventory.maxlvl) break;
                     SearchIndex(inventory.weaponSlots, fireball);
                     inventory.LevelUpWeapon(index);
-                    fireball.damage += 1;
+                    inventory.fireballLvl += 1;
+                    fireball.damage *= 2;
+                    fireball.fireRateFireball -= 0.2f;
                     break;
                 }
             case 4:
@@ -210,9 +231,11 @@ public class GameManagment : MonoBehaviour
                 }
                 else
                 {
+                    if (inventory.scytheLvl == inventory.maxlvl) break;
                     SearchIndex(inventory.weaponSlots, scythe);
                     inventory.LevelUpWeapon(index);
-                    scythe.damage += 1;
+                    inventory.scytheLvl += 1;
+                    scythe.damage *= 1.5f;
                     break;
                 }
         }
@@ -290,6 +313,12 @@ public class GameManagment : MonoBehaviour
 
         if (boss != null) boss.GetComponent<EnemyMovment>().enabled = false;
 
+        //books = GameObject.FindGameObjectsWithTag("BookWeapon");
+        //foreach (GameObject book in books)
+        //{
+        //    Destroy(book);
+        //}
+
         //wy³¹cz weapony
         weapons = GameObject.FindGameObjectsWithTag("Weapon");
         foreach (GameObject weapon in weapons)
@@ -297,8 +326,15 @@ public class GameManagment : MonoBehaviour
             weapon.SetActive(false);
         }
 
+        books = GameObject.FindGameObjectsWithTag("BookWeapon");
+        foreach (GameObject book in books)
+        {
+            book.SetActive(false);
+        }
+
         CheckController();
         SetControllers();
+        //if (existBook) book.spawnCount = 0;
 
         //wy³¹czenie obiektów broni
         weaponsControllers = GameObject.FindGameObjectsWithTag("WeaponController");
@@ -331,7 +367,11 @@ public class GameManagment : MonoBehaviour
         }
         foreach (GameObject weapon in weapons)
         {
-            weapon.SetActive(false);
+            weapon.SetActive(true);
+        }
+        foreach (GameObject book in books)
+        {
+            book.SetActive(true);
         }
     }
 }

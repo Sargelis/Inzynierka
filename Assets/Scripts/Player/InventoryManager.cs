@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     public int bookLvl = 0;
     public int fireballLvl = 0;
     public int scytheLvl = 0;
+    public int maxlvl = 5;
 
     public void AddWeapon(int slotIndex, WeaponController weapon)
     {
@@ -27,24 +28,6 @@ public class InventoryManager : MonoBehaviour
     public void LevelUpWeapon(int slotIndex)
     {
         weaponLevels[slotIndex] += 1;
-        switch (slotIndex)
-        {
-            case 0:
-                shootingLvl += 1;
-                break;
-            case 1:
-                axeLvl += 1;
-                break;
-            case 2:
-                bookLvl += 1;
-                break;
-            case 3:
-                fireballLvl += 1;
-                break;
-            case 4:
-                scytheLvl += 1;
-                break;
-        }
     }
     /*
     public void LevelUpPassiveItem(int slotIndex)

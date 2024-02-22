@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] float maxHealth;
+    [SerializeField] public float maxHealth;
     [HideInInspector] public float currentHealth;
-    [SerializeField] float expNeeded = 100f;
+    [SerializeField] public float expNeeded = 100f;
     [HideInInspector] public float exp = 0f;
     [HideInInspector] public float lvl = 1f;
 

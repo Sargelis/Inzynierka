@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: b702ffcad324c8848b620bfb09aece67
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: a57477913897c46af95d590f580878bd, type: 3}
+  svgType: 0
+  texturedSpriteMeshType: 0
+  svgPixelsPerUnit: 100
+  gradientResolution: 64
+  alignment: 0
+  customPivot: {x: 0, y: 0}
+  generatePhysicsShape: 0
+  viewportOptions: 0
+  preserveViewport: 0
+  advancedMode: 0
+  predefinedResolutionIndex: 1
+  targetResolution: 1080
+  resolutionMultiplier: 1
+  stepDistance: 10
+  samplingStepDistance: 100
+  maxCordDeviationEnabled: 0
+  maxCordDeviation: 1
+  maxTangentAngleEnabled: 0
+  maxTangentAngle: 5
+  keepTextureAspectRatio: 1
+  textureSize: 256
+  textureWidth: 256
+  textureHeight: 256
+  wrapMode: 0
+  filterMode: 1
+  sampleCount: 4
+  preserveSVGImageAspect: 0
+  useSVGPixelsPerUnit: 0
+  spriteData:
+    TessellationDetail: 0
+    SpriteRect:
+      name: uiSprite
+      originalName: 
+      pivot: {x: 0.50043684, y: 0.50224483}
+      alignment: 0
+      border: {x: 0, y: 0, z: 0, w: 0}
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 317
+        height: 73
+      spriteID: 7df66bbcaa3964946b27f7aa83fb5da9
+    PhysicsOutlines: []

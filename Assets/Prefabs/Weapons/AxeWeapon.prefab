@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6341937944439929650}
   - component: {fileID: 6803444120246713326}
-  - component: {fileID: 3814158671125335940}
   - component: {fileID: 493329036769142892}
+  - component: {fileID: 5340372929582144264}
   m_Layer: 0
   m_Name: AxeWeapon
   m_TagString: Weapon
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4790026633532878404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,19 +75,38 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
-  m_Color: {r: 1, g: 0.68506926, b: 0, a: 1}
+  m_Sprite: {fileID: -1161268025, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3814158671125335940
-BoxCollider2D:
+--- !u!114 &493329036769142892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790026633532878404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e176e2da76225b44ca679c3bde2505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShooting: {fileID: 0}
+  axePrefab: {fileID: 4790026633532878404}
+  fireRateAxe: 2.5
+  damage: 1
+  speed: 3
+  moveSpeed: 4
+  duration: 4
+--- !u!60 &5340372929582144264
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,33 +139,36 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.81, y: 2.7202911}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 2
+    drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &493329036769142892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4790026633532878404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e176e2da76225b44ca679c3bde2505db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerShooting: {fileID: 0}
-  axePrefab: {fileID: 4790026633532878404}
-  fireRateAxe: 2.5
-  damage: 1
-  speed: 3
-  moveSpeed: 4
-  duration: 4
+  m_Points:
+    m_Paths:
+    - - {x: 0.89259744, y: -0.34291056}
+      - {x: 0.9097264, y: -0.1373637}
+      - {x: 0.9097264, y: 1.2672065}
+      - {x: 0.85833967, y: 1.3871089}
+      - {x: 0.6527928, y: 1.3871089}
+      - {x: 0.0532811, y: 0.9074995}
+      - {x: -0.6318751, y: 1.3185933}
+      - {x: -0.78603524, y: 1.3871089}
+      - {x: -0.9059376, y: 1.3871089}
+      - {x: -0.9059376, y: 0.15382768}
+      - {x: -0.88880867, y: -0.24013713}
+      - {x: -0.8545509, y: -0.27439493}
+      - {x: -0.76890635, y: -0.27439493}
+      - {x: -0.3064259, y: 0.119569875}
+      - {x: -0.34068373, y: -0.3771684}
+      - {x: -0.3235548, y: -0.83964884}
+      - {x: -0.3235548, y: -1.1993558}
+      - {x: -0.20365249, y: -1.336387}
+      - {x: 0.070410006, y: -1.336387}
+      - {x: 0.19031234, y: -1.0794535}
+      - {x: 0.19031234, y: 0.03392535}
+      - {x: 0.87546855, y: -0.4114262}
+  m_UseDelaunayMesh: 0
