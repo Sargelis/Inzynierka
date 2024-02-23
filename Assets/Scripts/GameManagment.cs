@@ -298,7 +298,7 @@ public class GameManagment : MonoBehaviour
     public void Pause()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("BOSS");
 
         stopTimer = true;
         playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -311,7 +311,14 @@ public class GameManagment : MonoBehaviour
             em.enabled = false;
         }
 
-        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = false;
+        if (bosses != null)
+        {
+            foreach (GameObject boss in bosses)
+            {
+                em = boss.GetComponent<EnemyMovment>();
+                em.enabled = false;
+            }
+        }
 
         //books = GameObject.FindGameObjectsWithTag("BookWeapon");
         //foreach (GameObject book in books)
@@ -351,14 +358,21 @@ public class GameManagment : MonoBehaviour
         wc.enabled = true;
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var boss = GameObject.FindGameObjectWithTag("BOSS");
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("BOSS");
 
         foreach (GameObject enemy in enemies)
         {
             em = enemy.GetComponent<EnemyMovment>();
             em.enabled = true;
         }
-        if (boss != null) boss.GetComponent<EnemyMovment>().enabled = true;
+        if (bosses != null)
+        {
+            foreach (GameObject boss in bosses)
+            {
+                em = boss.GetComponent<EnemyMovment>();
+                em.enabled = true;
+            }
+        }
 
         //w³¹cz obiekty
         foreach (GameObject weaponControllerObject in weaponsControllers)

@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     public void SetHealthBar()
     {
         healthBar.value = playerStats.currentHealth;
+        healthBar.maxValue = playerStats.maxHealth;
     }
     public void SetExpBar()
     {
