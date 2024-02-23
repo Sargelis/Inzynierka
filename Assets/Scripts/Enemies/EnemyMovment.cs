@@ -7,10 +7,12 @@ public class EnemyMovment : MonoBehaviour
 {
     Transform player;
     [SerializeField] EnemyStats enemyStats;
+    PlayerStats playerStats;
 
     void Start()
     {
         player = FindObjectOfType<PlayerMovement>().transform; //znajdü player
+        playerStats = FindAnyObjectByType<PlayerStats>();
     }
     void Update()
     {
@@ -19,6 +21,6 @@ public class EnemyMovment : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) //jak kolizja to player hp--
     {
-        if(collision.collider.CompareTag("Player")) FindAnyObjectByType<PlayerStats>().currentHealth--; //playerStats.health--;
+        if(collision.collider.CompareTag("Player")) playerStats.currentHealth -= enemyStats.damage; //playerStats.health--;
     }
 }

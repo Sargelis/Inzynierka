@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField] float damage;
+    public float damage;
     public float moveSpeed; //musi public
     [SerializeField] float maxHealth;
-    [SerializeField] public GameObject drop;
-    public ExpGem gem;
+    public GameObject drop;
     float currentHealth;
 
     [SerializeField] float despawnDistance = 20f;
@@ -20,12 +19,6 @@ public class EnemyStats : MonoBehaviour
         currentHealth = maxHealth;
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        if (this.CompareTag("BOSS"))
-        {
-            gem = drop.GetComponent<ExpGem>();
-            gem.gemValue *= 2;
-        }
     }
     void Update()
     {

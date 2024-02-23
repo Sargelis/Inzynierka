@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -8,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public class Wave   //musi public
     {
         public string waveName;
-        public int waveQuota;   //total enemies
+        [HideInInspector] public int waveQuota;   //total enemies
         public float spawnInterval;
         [HideInInspector] public int spawnCount;  //number enemies spawned
         public List<EnemyGroup> enemyGroups;    //List of gropu enemis to spawn
@@ -34,13 +36,15 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawner Attributes")]
     float spawnTimer; //when spawn next enemy
     [SerializeField] float waveInterval;  //interval between each wave
+    float waveCooldown;
     [HideInInspector] public int enemiesAlive;
     [SerializeField] int maxEnemiesAllowed;   //max of enemies on map
     bool maxEnemiesReached = false;
     [Header("Bosses")]
     [SerializeField] List<Bosses> bosses;
     int i = 0;
-    [SerializeField] float bossTimer = 60;
+    [SerializeField] float bossTimer;
+    float bossCooldown;
     [Header("Spawn Positions")]
     public List<Transform> relativeSpawnPoints; //musi public
 
@@ -48,10 +52,20 @@ public class EnemySpawner : MonoBehaviour
     {
         player = FindObjectOfType<PlayerStats>().transform;
         CalculateWaveQuota();
+        bossCooldown = bossTimer;
+        waveCooldown = waveInterval;
     }
     void Update()
     {
-        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0) StartCoroutine(BeginNextWave()); //check if wave ended and next wave should start
+        waveInterval -= Time.deltaTime;
+        if (currentWaveCount < waves.Count)
+        {
+            if (waves[currentWaveCount].spawnCount >= waves[currentWaveCount].waveQuota || waveInterval <= 0)
+            {
+                NextWave();
+                waveInterval = waveCooldown;
+            }
+        }
 
         bossTimer -= Time.deltaTime;
         spawnTimer += Time.deltaTime;
@@ -62,10 +76,10 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies();
         }
 
-        if (bossTimer <= 0)
+        if (bossTimer <= 0 || waves[currentWaveCount].spawnCount >= waves[currentWaveCount].waveQuota)
         {
             SpawnBoss();
-            bossTimer = 60;
+            bossTimer = bossCooldown;
             i++;
         }
     }
@@ -104,11 +118,9 @@ public class EnemySpawner : MonoBehaviour
 
         if (enemiesAlive < maxEnemiesAllowed) maxEnemiesReached = false;
     }
-    IEnumerator BeginNextWave()
+    public void NextWave()
     {
-        yield return new WaitForSeconds(waveInterval);  //czekaj przez waveInterval sekund
-
-        if (currentWaveCount < waves.Count - 1) //jak jest wiêcej fal to zacznij nastêpn¹
+        if(currentWaveCount < waves.Count - 1)
         {
             currentWaveCount++;
             CalculateWaveQuota();
