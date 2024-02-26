@@ -1692,7 +1692,7 @@ PrefabInstance:
     - target: {fileID: -882159951598688441, guid: 82725466bfdc5bb46a602fef87ecf639, type: 3}
       propertyPath: book
       value: 
-      objectReference: {fileID: 1384852839, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
+      objectReference: {fileID: 1142783943, guid: 56f73c3d2845aa048a98e56f33d4efba, type: 3}
     - target: {fileID: -882159951598688441, guid: 82725466bfdc5bb46a602fef87ecf639, type: 3}
       propertyPath: pause
       value: 
@@ -1736,7 +1736,7 @@ PrefabInstance:
     - target: {fileID: -882159951598688441, guid: 82725466bfdc5bb46a602fef87ecf639, type: 3}
       propertyPath: scythe
       value: 
-      objectReference: {fileID: -1909789458, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
+      objectReference: {fileID: -1803629123, guid: 56f73c3d2845aa048a98e56f33d4efba, type: 3}
     - target: {fileID: -882159951598688441, guid: 82725466bfdc5bb46a602fef87ecf639, type: 3}
       propertyPath: ability
       value: 

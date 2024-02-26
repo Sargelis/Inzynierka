@@ -7,6 +7,7 @@ public class ScytheWeapon : ScytheController
     [SerializeField] float speed;
     [SerializeField] float duration;
 
+    float rotation;
     float angle;
     Vector3 playerPosition;
     Vector3 startPosition;
@@ -26,6 +27,7 @@ public class ScytheWeapon : ScytheController
         playerPosition = firePoint.transform.position;
         x += speed * Time.deltaTime;
         y += speed * Time.deltaTime;
+        rotation += Time.deltaTime * 10; 
         
         if (duration <= 0f)
         {
@@ -36,6 +38,7 @@ public class ScytheWeapon : ScytheController
         {
             this.transform.position = startPosition + new Vector3(x * a, y * b, 0f);
         }
+        this.transform.Rotate(0, 0, rotation);
 
         duration -= Time.deltaTime;
     }
