@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1384852839, guid: b6cd5faea5083ff4fb16b98123ab2348, type: 3}
+  m_Sprite: {fileID: 1142783943, guid: 56f73c3d2845aa048a98e56f33d4efba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,8 +146,10 @@ MonoBehaviour:
   playerShooting: {fileID: 0}
   bookPrefab: {fileID: 3888810387270416659}
   rotatorPrefab: {fileID: 0}
+  cooldownBook: 0
   fireRateBook: 3
   damage: 1
   rotationSpeed: 150
   radiusOffset: 3
   maxSpawnCount: 0
+  spawnCount: 0
