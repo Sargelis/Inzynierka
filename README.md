@@ -1,1 +1,3 @@
-Wymaga Unity3D w wersji 2022.3.1f1
+Jest to gra typu roguelike
+Instrukcja:
+W,A,S,D porusznaie się postacią
